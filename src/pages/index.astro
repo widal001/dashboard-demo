@@ -1,14 +1,45 @@
 ---
 import "@/styles/globals.css";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import MainNav from "@/components/MainNav.astro";
+import DashboardStats from "@/components/dashboard/dashboard-stats";
+
+import type { StatisticProps } from "@/components/dashboard/dashboard-stats";
+import type { NavItem } from "@/components/MainNav.astro";
+
+const stats = [
+  {
+    title: "Total opened",
+    value: "80 points",
+    delta: "2 new points added yesterday",
+  },
+  {
+    title: "Total closed",
+    value: "60 points",
+    delta: "10 points closed yesterday",
+  },
+  {
+    title: "Percent completed",
+    value: "75%",
+    delta: "+5% points from yesterday",
+  },
+  {
+    title: "Time left in sprint",
+    value: "7 days",
+    delta: "50% of sprint complete",
+  },
+] as StatisticProps[];
+
+const links = [
+  {
+    name: "Sprint Planning",
+    href: "#",
+  },
+  {
+    name: "Delivery",
+    href: "#",
+  },
+] as NavItem[];
 ---
 
 <html lang="en">
@@ -21,19 +52,9 @@ import {
   </head>
   <body>
     <main>
-      <div class="container max-w-xl mt-12">
-        <Card>
-          <CardHeader>
-            <CardTitle>Card Title</CardTitle>
-            <CardDescription>Card Description</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p>Card Content</p>
-          </CardContent>
-          <CardFooter>
-            <p>Card Footer</p>
-          </CardFooter>
-        </Card>
+      <MainNav links={links} />
+      <div class="container mt-12">
+        <DashboardStats stats={stats} />
       </div>
     </main>
   </body>
