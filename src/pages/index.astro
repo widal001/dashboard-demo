@@ -1,45 +1,44 @@
 ---
 import "@/styles/globals.css";
 
+import { mockBarChartData, mockSprintStats } from "@/lib/data";
+
+import { Button } from "@/components/ui/button";
 import MainNav from "@/components/MainNav.astro";
-import DashboardStats from "@/components/dashboard/dashboard-stats";
+import DashboardContents from "@/components/dashboard/dashboard-contents";
 
-import type { StatisticProps } from "@/components/dashboard/dashboard-stats";
+import type { DashboardProps } from "@/components/dashboard/dashboard-contents";
+import type { BarChartProps } from "@/components/dashboard/bar-chart";
 import type { NavItem } from "@/components/MainNav.astro";
-
-const stats = [
-  {
-    title: "Total opened",
-    value: "80 points",
-    delta: "2 new points added yesterday",
-  },
-  {
-    title: "Total closed",
-    value: "60 points",
-    delta: "10 points closed yesterday",
-  },
-  {
-    title: "Percent completed",
-    value: "75%",
-    delta: "+5% points from yesterday",
-  },
-  {
-    title: "Time left in sprint",
-    value: "7 days",
-    delta: "50% of sprint complete",
-  },
-] as StatisticProps[];
 
 const links = [
   {
-    name: "Sprint Planning",
+    name: "Sprints",
     href: "#",
   },
   {
-    name: "Delivery",
+    name: "Deliverables",
     href: "#",
   },
 ] as NavItem[];
+
+const barChartData = mockBarChartData();
+const barChartProps = {
+  data: barChartData,
+  labelKey: "name",
+  valueKey: "total",
+} as BarChartProps;
+
+const chartProps = {
+  kind: "bar-chart",
+  title: "Sprint velocity",
+  data: barChartProps,
+};
+
+const dashboardContents = {
+  stats: mockSprintStats(),
+  charts: [chartProps, chartProps],
+} as DashboardProps;
 ---
 
 <html lang="en">
@@ -53,9 +52,17 @@ const links = [
   <body>
     <main>
       <MainNav links={links} />
-      <div class="container mt-12">
-        <DashboardStats stats={stats} />
-      </div>
+      <section id="sprint-dashboard" class="container space-y-4">
+        <div class="flex-1 space-y-4 pt-6">
+          <div class="flex items-center justify-between space-y-2">
+            <h2 class="text-3xl font-bold tracking-tight">Sprint Dashboard</h2>
+            <div class="max-sm:hidden flex items-center space-x-2">
+              <Button>Download data</Button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <DashboardContents {...dashboardContents} client:load />
     </main>
   </body>
 </html>

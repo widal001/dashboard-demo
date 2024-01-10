@@ -6,17 +6,16 @@ export interface StatisticProps {
   delta: string;
 }
 
-export interface DashboardStatisticProps {
-  stats: StatisticProps[];
-}
-
-function DashboardStats({ stats }: DashboardStatisticProps) {
+export default function DashboardStats(props: { stats: StatisticProps[] }) {
+  const stats = props.stats;
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       {stats.map((stat) => (
-        <Card>
+        <Card key={stat.title}>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
+            <CardTitle className="text-sm tracking-normal font-medium">
+              {stat.title}
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">{stat.value}</div>
@@ -27,5 +26,3 @@ function DashboardStats({ stats }: DashboardStatisticProps) {
     </div>
   );
 }
-
-export default DashboardStats;

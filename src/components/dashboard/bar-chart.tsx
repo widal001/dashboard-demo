@@ -6,7 +6,11 @@ export interface BarChartProps {
   valueKey: string;
 }
 
-export function Overview({ data, labelKey, valueKey }: BarChartProps) {
+export function ResponsiveBarChart({
+  data,
+  labelKey,
+  valueKey,
+}: BarChartProps) {
   return (
     <ResponsiveContainer className="min-h-40 md:min-h-80">
       <BarChart data={data}>
