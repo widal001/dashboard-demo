@@ -5,7 +5,7 @@ import { mockBarChartData, mockSprintStats } from "@/lib/data";
 
 import { Button } from "@/components/ui/button";
 import MainNav from "@/components/MainNav.astro";
-import DashboardContents from "@/components/dashboard/dashboard-contents";
+import DashboardViews from "@/components/dashboard/dashboard-views";
 
 import type { DashboardProps } from "@/components/dashboard/dashboard-contents";
 import type { BarChartProps } from "@/components/dashboard/bar-chart";
@@ -39,6 +39,23 @@ const dashboardContents = {
   stats: mockSprintStats(),
   charts: [chartProps, chartProps],
 } as DashboardProps;
+const views = [
+  {
+    name: "Sprint 12",
+    key: "sprint-12",
+    contents: dashboardContents,
+  },
+  {
+    name: "Sprint 11",
+    key: "sprint-11",
+    contents: dashboardContents,
+  },
+  {
+    name: "Sprint 10",
+    key: "sprint-10",
+    contents: dashboardContents,
+  },
+];
 ---
 
 <html lang="en">
@@ -62,7 +79,7 @@ const dashboardContents = {
           </div>
         </div>
       </section>
-      <DashboardContents {...dashboardContents} client:load />
+      <DashboardViews views={views} client:load />
     </main>
   </body>
 </html>

@@ -1,4 +1,11 @@
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 export interface BarChartProps {
   data: Array<Object>;
@@ -28,6 +35,7 @@ export function ResponsiveBarChart({
           axisLine={false}
           tickFormatter={(value) => `$${value}`}
         />
+        <Tooltip />
         <Bar
           dataKey={valueKey}
           fill="currentColor"

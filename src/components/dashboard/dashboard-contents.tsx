@@ -11,7 +11,7 @@ export interface DashboardProps {
 
 export default function DashboardContents({ stats, charts }: DashboardProps) {
   return (
-    <div className="container space-y-4 my-4">
+    <div className="space-y-4">
       <DashboardStats stats={stats} />
       <DashboardCharts charts={charts}></DashboardCharts>
     </div>
