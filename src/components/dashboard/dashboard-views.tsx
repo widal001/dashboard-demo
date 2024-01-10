@@ -18,7 +18,9 @@ export default function DashboardViews(props: { views: DashboardViewProps[] }) {
     >
       <TabsList>
         {views.map((view) => (
-          <TabsTrigger value={view.key}>{view.name}</TabsTrigger>
+          <TabsTrigger key={view.key} value={view.key}>
+            {view.name}
+          </TabsTrigger>
         ))}
       </TabsList>
       {views.map((view) => (

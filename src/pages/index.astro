@@ -1,7 +1,7 @@
 ---
 import "@/styles/globals.css";
 
-import { mockBarChartData, mockSprintStats } from "@/lib/data";
+import { fetchSprintMetrics } from "@/lib/data";
 
 import { Button } from "@/components/ui/button";
 import MainNav from "@/components/MainNav.astro";
@@ -22,38 +22,21 @@ const links = [
   },
 ] as NavItem[];
 
-const barChartData = mockBarChartData();
-const barChartProps = {
-  data: barChartData,
-  labelKey: "name",
-  valueKey: "total",
-} as BarChartProps;
-
-const chartProps = {
-  kind: "bar-chart",
-  title: "Sprint velocity",
-  data: barChartProps,
-};
-
-const dashboardContents = {
-  stats: mockSprintStats(),
-  charts: [chartProps, chartProps],
-} as DashboardProps;
 const views = [
   {
     name: "Sprint 12",
     key: "sprint-12",
-    contents: dashboardContents,
+    contents: fetchSprintMetrics(4),
   },
   {
     name: "Sprint 11",
     key: "sprint-11",
-    contents: dashboardContents,
+    contents: fetchSprintMetrics(0),
   },
   {
     name: "Sprint 10",
     key: "sprint-10",
-    contents: dashboardContents,
+    contents: fetchSprintMetrics(0),
   },
 ];
 ---
