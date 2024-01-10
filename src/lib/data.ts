@@ -130,14 +130,14 @@ export function fetchSprintMetrics(daysLeft: number) {
   const sprintLength = 14;
   const startingPoints = Math.floor(Math.random() * 10 + 100);
   const burndownPoints = mockBurndownData({
-    startDate: 30,
+    startDate: 1,
     startPoints: startingPoints,
     numberOfDays: sprintLength,
   });
   // Get data for sprint burndown
   const burndownData = {
     data: burndownPoints,
-    labelKey: "name",
+    labelKey: "day",
     traces: [
       {
         dataKey: "total_open",
@@ -154,11 +154,11 @@ export function fetchSprintMetrics(daysLeft: number) {
   // Get data for sprint burnup
   const burnupData = {
     data: mockBurnupData({
-      startDate: 30,
+      startDate: 1,
       startPoints: startingPoints,
       numberOfDays: sprintLength,
     }),
-    labelKey: "name",
+    labelKey: "day",
     traces: [
       {
         dataKey: "total_opened",
