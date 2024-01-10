@@ -2,29 +2,29 @@
 import "@/styles/globals.css";
 import Layout from "@/layouts/Layout.astro";
 
-import { fetchSprintMetrics } from "@/lib/sprint";
+import { fetchDeliveryMetrics } from "@/lib/delivery";
 
 import DashboardHeader from "@/components/dashboard/DashboardHeader.astro";
 import DashboardViews from "@/components/dashboard/dashboard-views";
 
 const views = [
   {
-    name: "Sprint 12",
-    key: "sprint-12",
-    contents: fetchSprintMetrics(4),
+    name: "Static site public launch",
+    key: "issue-77",
+    contents: fetchDeliveryMetrics(4),
   },
   {
-    name: "Sprint 11",
-    key: "sprint-11",
-    contents: fetchSprintMetrics(0),
+    name: "API soft launch",
+    key: "issue-42",
+    contents: fetchDeliveryMetrics(0),
   },
   {
-    name: "Sprint 10",
-    key: "sprint-10",
-    contents: fetchSprintMetrics(0),
+    name: "Open source group kickoff",
+    key: "issue-63",
+    contents: fetchDeliveryMetrics(0),
   },
 ];
-const title = "Sprint Dashboard";
+const title = "Delivery Dashboard";
 ---
 
 <Layout title={title}>
