@@ -1,26 +1,11 @@
 ---
 import "@/styles/globals.css";
+import Layout from "@/layouts/Layout.astro";
 
 import { fetchSprintMetrics } from "@/lib/data";
 
-import { Button } from "@/components/ui/button";
-import MainNav from "@/components/MainNav.astro";
+import DashboardHeader from "@/components/dashboard/DashboardHeader.astro";
 import DashboardViews from "@/components/dashboard/dashboard-views";
-
-import type { DashboardProps } from "@/components/dashboard/dashboard-contents";
-import type { BarChartProps } from "@/components/dashboard/bar-chart";
-import type { NavItem } from "@/components/MainNav.astro";
-
-const links = [
-  {
-    name: "Sprints",
-    href: "#",
-  },
-  {
-    name: "Deliverables",
-    href: "#",
-  },
-] as NavItem[];
 
 const views = [
   {
@@ -39,30 +24,10 @@ const views = [
     contents: fetchSprintMetrics(0),
   },
 ];
+const title = "Sprint Dashboard";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <main>
-      <MainNav links={links} />
-      <section id="sprint-dashboard" class="container space-y-4">
-        <div class="flex-1 space-y-4 pt-6">
-          <div class="flex items-center justify-between space-y-2">
-            <h2 class="text-3xl font-bold tracking-tight">Sprint Dashboard</h2>
-            <div class="max-sm:hidden flex items-center space-x-2">
-              <Button>Download data</Button>
-            </div>
-          </div>
-        </div>
-      </section>
-      <DashboardViews views={views} client:load />
-    </main>
-  </body>
-</html>
+<Layout title={title}>
+  <DashboardHeader title={title} />
+  <DashboardViews views={views} client:load />
+</Layout>
