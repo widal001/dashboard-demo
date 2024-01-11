@@ -3,10 +3,12 @@ import { mockBurndownData, mockBurnupData } from "@/lib/data";
 
 export function fetchSprintMetrics(daysLeft: number) {
   const sprintLength = 14;
-  const startingPoints = Math.floor(Math.random() * 10 + 100);
+  const openedPoints = Math.floor(Math.random() * 10 + 100);
+  const closedPoints = openedPoints - Math.floor(Math.random() * 10);
   const burndownPoints = mockBurndownData({
     startDate: 1,
-    startPoints: startingPoints,
+    startPoints: openedPoints,
+    endPoints: closedPoints,
     numberOfDays: sprintLength,
   });
   // Get data for sprint burndown
@@ -30,20 +32,21 @@ export function fetchSprintMetrics(daysLeft: number) {
   const burnupData = {
     data: mockBurnupData({
       startDate: 1,
-      startPoints: startingPoints,
+      startPoints: openedPoints,
+      endPoints: closedPoints,
       numberOfDays: sprintLength,
     }),
     labelKey: "day",
     traces: [
       {
-        dataKey: "total_opened",
-        strokeColor: "#82ca9d",
-        fillColor: "#82ca9d",
-      },
-      {
         dataKey: "total_closed",
         strokeColor: "#8884d8",
         fillColor: "#8884d8",
+      },
+      {
+        dataKey: "total_opened",
+        strokeColor: "#82ca9d",
+        fillColor: "#82ca9d",
       },
     ],
   };
@@ -53,17 +56,16 @@ export function fetchSprintMetrics(daysLeft: number) {
     data: burnupData,
   };
   return {
-    stats: mockSprintStats(daysLeft, startingPoints),
+    stats: mockSprintStats(daysLeft, openedPoints, closedPoints),
     charts: [burndownProps, burnupProps],
   };
 }
 
 function mockSprintStats(
   daysLeft: number,
-  startPoints: number
+  openedCount: number,
+  closedCount: number
 ): StatisticProps[] {
-  const openedCount = startPoints;
-  const closedCount = openedCount - Math.floor(Math.random() * 10);
   return [
     {
       title: "Total opened",
@@ -83,7 +85,7 @@ function mockSprintStats(
     {
       title: "Time left in sprint",
       value: `${daysLeft} days`,
-      delta: `Sprint is ${Math.floor((daysLeft / 14) * 100)}% complete`,
+      delta: `Sprint is ${Math.floor(((14 - daysLeft) / 14) * 100)}% complete`,
     },
   ];
 }

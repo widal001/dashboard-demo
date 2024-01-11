@@ -3,10 +3,12 @@ import { mockBurndownData, mockBurnupData } from "@/lib/data";
 
 export function fetchDeliveryMetrics(daysLeft: number) {
   const sprintLength = 14;
-  const startingPoints = Math.floor(Math.random() * 10 + 100);
+  const openedPoints = Math.floor(Math.random() * 10 + 100);
+  const closedPoints = openedPoints - Math.floor(Math.random() * 10);
   const burndownPoints = mockBurndownData({
     startDate: 1,
-    startPoints: startingPoints,
+    startPoints: openedPoints,
+    endPoints: closedPoints,
     numberOfDays: sprintLength,
   });
   // Get data for sprint burndown
@@ -30,20 +32,21 @@ export function fetchDeliveryMetrics(daysLeft: number) {
   const burnupData = {
     data: mockBurnupData({
       startDate: 1,
-      startPoints: startingPoints,
+      startPoints: openedPoints,
+      endPoints: closedPoints,
       numberOfDays: sprintLength,
     }),
     labelKey: "day",
     traces: [
       {
-        dataKey: "total_opened",
-        strokeColor: "#82ca9d",
-        fillColor: "#82ca9d",
-      },
-      {
         dataKey: "total_closed",
         strokeColor: "#8884d8",
         fillColor: "#8884d8",
+      },
+      {
+        dataKey: "total_opened",
+        strokeColor: "#82ca9d",
+        fillColor: "#82ca9d",
       },
     ],
   };
@@ -53,7 +56,7 @@ export function fetchDeliveryMetrics(daysLeft: number) {
     data: burnupData,
   };
   return {
-    stats: mockDeliveryStats(daysLeft, startingPoints),
+    stats: mockDeliveryStats(daysLeft, openedPoints),
     charts: [burndownProps, burnupProps],
   };
 }

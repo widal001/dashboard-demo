@@ -46,6 +46,7 @@ export function ResponsiveAreaChart({ data, labelKey, traces }: BarChartProps) {
             key={trace.dataKey}
             type="monotone"
             dataKey={trace.dataKey}
+            stackId="1"
             stroke={trace.strokeColor}
             fillOpacity={1}
             fill={`url(#${trace.dataKey})`}
