@@ -25,7 +25,7 @@ export function fetchDeliveryMetrics(daysLeft: number) {
   };
   const burndownProps = {
     kind: "area-chart",
-    title: "Sprint burndown",
+    title: "Deliverable burndown",
     data: burndownData,
   };
   // Get data for sprint burnup
@@ -52,7 +52,7 @@ export function fetchDeliveryMetrics(daysLeft: number) {
   };
   const burnupProps = {
     kind: "area-chart",
-    title: "Sprint burnup",
+    title: "Deliverable burnup",
     data: burnupData,
   };
   return {
@@ -84,9 +84,9 @@ function mockDeliveryStats(
       delta: "+5% points from yesterday",
     },
     {
-      title: "Time left in sprint",
-      value: `${daysLeft} days`,
-      delta: `Sprint is ${Math.floor((daysLeft / 14) * 100)}% complete`,
+      title: "Percent of issues pointed",
+      value: `${Math.floor(Math.random() * 10 + 90)}%`,
+      delta: `+${Math.floor(Math.random() * 10)}% from yesterday`,
     },
   ];
 }
