@@ -69,12 +69,12 @@ export function mockBurnupData({
   const mockData = [];
   for (let index = 0; index < sprintLength; index++) {
     const date = dateRange[index];
-    const pointsOpened = openedPointsArr[index] - closedPointsArr[index];
+    const pointsOpen = openedPointsArr[index] - closedPointsArr[index];
     const pointsClosed = closedPointsArr[index];
     mockData.push({
       day: `Jan ${date}`,
-      total_opened: pointsOpened,
-      total_closed: pointsClosed,
+      open: pointsOpen,
+      closed: pointsClosed,
     });
   }
   // Return the mock data

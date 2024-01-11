@@ -39,12 +39,12 @@ export function fetchDeliveryMetrics(daysLeft: number) {
     labelKey: "day",
     traces: [
       {
-        dataKey: "total_closed",
+        dataKey: "closed",
         strokeColor: "#8884d8",
         fillColor: "#8884d8",
       },
       {
-        dataKey: "total_opened",
+        dataKey: "open",
         strokeColor: "#82ca9d",
         fillColor: "#82ca9d",
       },
